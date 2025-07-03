@@ -1,17 +1,14 @@
 import express from 'express';
 import { checkAuth, login, logout, signup, updateProfile } from '../controllers/auth.controller';
 import { protectRoute } from '../middlewares/auth.middleware';
+import { asyncHandler } from '../lib/asyncHandler';
 
 const router = express.Router();
 
-//@ts-ignore
-router.post('/signup' , signup);
-//@ts-ignore
-router.post('/login', login);
-router.post('/logout', logout);
-//@ts-ignore
-router.put('/update',protectRoute, updateProfile);
-//@ts-ignore
-router.get('/check', protectRoute, checkAuth);
+router.post('/signup' , asyncHandler(signup));
+router.post('/login', asyncHandler(login));
+router.post('/logout', asyncHandler(logout));
+router.put('/update',asyncHandler(protectRoute), asyncHandler(updateProfile));
+router.get('/check', asyncHandler(protectRoute), asyncHandler(checkAuth));
 
 export default router;
