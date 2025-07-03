@@ -95,6 +95,8 @@ export const logout = async (req: Request, res: Response) => {
 
 export const updateProfile = async (req: Request, res: Response) => {
     try{
+        console.log(req.body);
+        
         const { profilePic } = req.body;
         //@ts-ignore
         const userId = req.user?._id ;
