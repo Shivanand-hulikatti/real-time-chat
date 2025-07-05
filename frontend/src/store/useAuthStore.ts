@@ -20,7 +20,7 @@ type Store = {
     updateProfile: (data: { profilePic: string }) => Promise<void>;
 };
 
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "/";
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "/";
 
 export const useAuthStore = create<Store>((set,get)=>({
     authUser : null,
@@ -90,6 +90,7 @@ export const useAuthStore = create<Store>((set,get)=>({
             toast.success("Logged in successfully!!");
             get().connectSocket();
         } catch (error) {
+            toast.error("Failed to log in. Please check your credentials.");
             console.error("Error logging in:", error);
         } finally {
             set({ isLoggingIn: false });

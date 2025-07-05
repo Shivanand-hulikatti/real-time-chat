@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/signup' , asyncHandler(signup));
 router.post('/login', asyncHandler(login));
-router.post('/logout', asyncHandler(logout));
+router.get('/logout', asyncHandler(logout));
 router.put('/update',asyncHandler(protectRoute), asyncHandler(updateProfile));
 router.get('/check', asyncHandler(protectRoute), asyncHandler(checkAuth));
 

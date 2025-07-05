@@ -29,6 +29,7 @@ export const signup = async (req : Request , res : Response) =>{
             email,
             password: hashedPassword,
         })
+        
 
         if(newUser){
             generateToken(newUser._id, res);
