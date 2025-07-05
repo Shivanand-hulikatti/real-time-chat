@@ -20,7 +20,7 @@ type Store = {
     updateProfile: (data: { profilePic: string }) => Promise<void>;
 };
 
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "/";
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000/" : "/";
 
 export const useAuthStore = create<Store>((set,get)=>({
     authUser : null,
@@ -111,7 +111,7 @@ export const useAuthStore = create<Store>((set,get)=>({
     updateProfile : async (data : { profilePic : string})=>{
         set({ isUpdatingProfile: true });
         try {
-            const res = await axiosInstance.put<any>('/auth/updateProfile', data);
+            const res = await axiosInstance.put<any>('/auth/update', data);
             set({ authUser: res.data });
             toast.success("Profile updated successfully!!");
         } catch (error : any) {

@@ -8,9 +8,10 @@ type chatStoreType = {
     messages : string[],
     users : string[],
     selectedUser : any,
-    isUserLoading : boolean,
+    isUsersLoading : boolean,
     isMessagesLoading : boolean,
     getUsers : ()=>void,
+    getMessages : (userId : string)=>void,
     sendMessage : (messageData : {selectedUser:any,messages : string[]})=>void,
     subscribeToMessages : ()=>void,
     unsubscribeFromMessages : ()=>void,
@@ -21,25 +22,39 @@ export const useChatStore = create<chatStoreType>((set,get)=>({
     messages : [],
     users : [],
     selectedUser : null,
-    isUserLoading : false ,
+    isUsersLoading : false ,
     isMessagesLoading : false,
 
     getUsers : async ()=>{
-        set({isUserLoading:true});
+        set({isUsersLoading:true});
         try {
             const res = await axiosInstance.get<any>('/messages/users');
             set({users : res.data});
         } catch (error) {
             toast.error("Error fetching users");
         } finally{
-            set({isUserLoading:false});
+            set({isUsersLoading:false});
+        }
+    },
+
+    getMessages : async (userId : string)=>{
+        set({isMessagesLoading:true});
+        try {
+            const res = await axiosInstance.get<any>(`/messages/${userId}`);
+            set({messages : res.data});
+        } catch (error) {
+            toast.error("Error fetching messages");
+        } finally{
+            set({isMessagesLoading:false});
         }
     },
 
     sendMessage : async (messageData : {selectedUser:any,messages : string[]})=>{
-        const { selectedUser, messages } = messageData;
+        const { selectedUser, messages } = get();
         try {
-            const res = await axiosInstance.post<any>(`/messages/send/${selectedUser._id}`, messageData);
+            // console.log(messageData);
+            
+            const res = await axiosInstance.post<any>(`/messages/send/${selectedUser._id}`, messageData);            
             set({messages: [...messages, res.data]});
         } catch (error) {
             toast.error("Error sending message");
