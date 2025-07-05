@@ -35,11 +35,10 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/* left side */}
+    <div className="min-h-screen grid lg:grid-cols-2 min-w-screen">
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* LOGO */}
+
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
               <div
@@ -59,12 +58,12 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                 <span className="label-text font-medium">Full Name</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <User className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type="text"
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 relative`}
                   placeholder="John Doe"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -77,12 +76,12 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                 <span className="label-text font-medium">Email</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <Mail className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type="email"
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 relative`}
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -95,19 +94,19 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                 <span className="label-text font-medium">Password</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <Lock className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 relative`}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute m-1 inset-y-0 right-0 pr-3 flex items-center z-15"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -142,7 +141,6 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-      {/* right side */}
 
       <AuthImagePattern
         title="Join our community"
