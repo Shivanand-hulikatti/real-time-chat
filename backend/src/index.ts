@@ -37,7 +37,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
   console.log('Server is running on http://localhost:3000');
   connectDB();
-});
+}); 
